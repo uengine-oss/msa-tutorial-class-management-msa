@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.uengine.hello-class</groupId>
+    <artifactId>hello-class</artifactId>
+    <version>MSA-version</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>shared-model</module>
+
+        <!-- core domain -->
+        <module>course</module>
+        <module>clazz</module>
+        <module>sme</module>
+
+        <!-- supportive domain -->
+        <module>customer</module>
+        <module>calendar</module>
+
+        <!-- general services -->
+        <module>proxy-service</module>
+        <module>registry-service</module>
+    </modules>
+
+
+</project>

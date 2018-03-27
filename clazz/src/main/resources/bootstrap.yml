@@ -1,0 +1,22 @@
+spring:
+  application:
+      name: clazz
+  profiles:
+    active: "local"
+
+server:
+  port: 8089
+
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      uri: http://config.pas-mini.io
+
+---
+spring:
+  profiles: dev,stg,prod
+  cloud:
+    config:
+      uri: http://marathon-lb-internal.marathon.mesos:10000

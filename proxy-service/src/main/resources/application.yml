@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: zuul-router
+
+
+server:
+  port: 8080
+  servletPath: /
+
+zuul:
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  addProxyHeaders: true
+
+  routes:
+    courses:
+      path: /courses/**
+      serviceId: course
+      stripPrefix: false
+    clazzes:
+      path: /clazzes/**
+      serviceId: clazz
+      stripPrefix: false
+#TODO
+#    clazzDays:
+#      path: /clazzDays/**
+#      serviceId: clazz
+#      stripPrefix: false
+    enrollments:
+      path: /enrollments/**
+      serviceId: clazz
+      stripPrefix: false
+
+endpoints:
+  routes:
+    sensitive: false
+
+ribbon:
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: true
+  ServerListRefreshInterval: 2000
+  ConnectTimeout: 10000
+  ReadTimeout: 10000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: ${eureka_url}
+    healthcheck:
+      enabled: true
+  instance:
+    statusPageUrlPath: ${server.servletPath}info
+    healthCheckUrlPath: ${server.servletPath}health
