@@ -1,6 +1,7 @@
 package hello;
 
 import org.metaworks.annotation.RestAssociation;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 import java.util.List;
@@ -128,11 +129,11 @@ public class Clazz{
 
             for(ClazzDay clazzDay : getClazzDays()){
 
-                List<ClazzDay> schedules = sharedCalendarService.getSchedules(clazzDay.getDate(), getInstructor());
+                ResourceSupport schedules = sharedCalendarService.getSchedules(getInstructor().getId(), clazzDay.getDate().toString());
 
-                if(schedules!=null && schedules.size() > 0){
-                    throw new RuntimeException("Instructor " + getInstructor().getFirstName() + " already have another class for that time slot.");
-                }
+//                if(schedules!=null && schedules.size() > 0){
+//                    throw new RuntimeException("Instructor " + getInstructor().getFirstName() + " already have another class for that time slot.");
+//                }
 
             }
 

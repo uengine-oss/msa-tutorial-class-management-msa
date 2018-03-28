@@ -2,6 +2,8 @@ package hello;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Clazz{
@@ -11,6 +13,8 @@ public class Clazz{
     String states;
     int evaluationRate;
     String title;
+
+    @ManyToOne
     Course course;
 
     public Long getId() {

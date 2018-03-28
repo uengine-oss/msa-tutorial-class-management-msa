@@ -13,7 +13,6 @@ import java.util.List;
  *
  http localhost:8080/courses title="aaa" duration=5 maxEnrollment=5 minEnrollment=1
  http localhost:8080/clazzes course="http://localhost:8080/courses/1"
- http "http://localhost:8080/courses/1/clazzes"
  */
 @Entity
 public class Course {
@@ -29,7 +28,7 @@ public class Course {
     Double unitPrice;
 
 
-    @RestAssociation(serviceId = "clazz", path="/clazzes/search/findByCourseId?courseId={courseId}", joinColumn = "courseId") @Transient //@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "course")
+    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "course")
     List<Clazz> clazzes;
 
     @Transient

@@ -23,16 +23,17 @@ public class Enrollment {
     @GeneratedValue
     Long id;
 
-    @RestAssociation(serviceId = "customer", path="/customers/{customerId}", joinColumn = "customerId") @Transient //@OneToOne
+    @RestAssociation(/*serviceId = "customer", */path="/customers/{customerId}", joinColumn = "customerId") @Transient //@OneToOne
     Customer customer;
 
-    String customerId;
-        public String getCustomerId() {
+    Long customerId;
+        public Long getCustomerId() {
             return customerId;
         }
-        public void setCustomerId(String customerId) {
+        public void setCustomerId(Long customerId) {
             this.customerId = customerId;
         }
+
 
 
     @OneToOne

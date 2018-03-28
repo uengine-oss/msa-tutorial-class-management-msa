@@ -6,7 +6,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
-@RepositoryRestResource
 public interface CourseRepository extends PagingAndSortingRepository<Course, Long> {
 
     List<Course> findByTitleContaining(@Param("title") String title);

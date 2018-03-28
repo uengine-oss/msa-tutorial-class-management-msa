@@ -9,28 +9,28 @@ public class Enrollment {
     @Id
     Long id;
 
-    Customer customer;
-    Clazz clazz;
+//    Customer customer;
+//    Clazz clazz;
 
     String status;
     String grade;
     String feedback;
 
-    public Customer getCustomer() {
-        return customer;
-    }
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Clazz getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Clazz clazz) {
-        this.clazz = clazz;
-    }
+//    public Clazz getClazz() {
+//        return clazz;
+//    }
+//
+//    public void setClazz(Clazz clazz) {
+//        this.clazz = clazz;
+//    }
 
 
     public String getStatus() {
