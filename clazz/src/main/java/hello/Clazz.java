@@ -2,6 +2,7 @@ package hello;
 
 import org.metaworks.annotation.RestAssociation;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Resources;
 
 import javax.persistence.*;
 import java.util.List;
@@ -113,7 +114,7 @@ public class Clazz{
     }
 
 
-    @PrePersist
+    @PrePersist @PreUpdate
     public void beforeSave() {
 
         checkAvailabilityAndSetInstructor();
@@ -130,10 +131,12 @@ public class Clazz{
             for(ClazzDay clazzDay : getClazzDays()){
 
                 ResourceSupport schedules = sharedCalendarService.getSchedules(getInstructor().getId(), clazzDay.getDate().toString());
+//                ResourceSupport schedules = sharedCalendarService.getSchedules(getInstructor().getId(), clazzDay.getDate());
 
-//                if(schedules!=null && schedules.size() > 0){
-//                    throw new RuntimeException("Instructor " + getInstructor().getFirstName() + " already have another class for that time slot.");
-//                }
+
+                if(schedules!=null && ((Resources)schedules).getContent().iterator().hasNext()){
+                    throw new RuntimeException("Instructor " + getInstructor().getId() + " already have another class for that time slot.");
+                }
 
             }
 

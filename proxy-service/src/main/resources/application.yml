@@ -20,14 +20,21 @@ zuul:
       path: /clazzes/**
       serviceId: clazz
       stripPrefix: false
-#TODO
-#    clazzDays:
-#      path: /clazzDays/**
-#      serviceId: clazz
-#      stripPrefix: false
+    clazzDays:
+      path: /clazzDays/**
+      serviceId: clazz
+      stripPrefix: false
     enrollments:
       path: /enrollments/**
       serviceId: clazz
+      stripPrefix: false
+    instructors: #TODO
+      path: /instructors/**
+      serviceId: instructor
+      stripPrefix: false
+    calendar:  #TODO
+      path: /calendar/**
+      serviceId: calendar
       stripPrefix: false
 
 endpoints:
