@@ -1,6 +1,10 @@
 package hello;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.metaworks.annotation.RestAssociation;
+import org.metaworks.dwr.MetaworksRemoteService;
+import org.metaworks.eventsourcing.EventSender;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -84,4 +88,18 @@ public class ClazzDay {
     }
 
 
+    @PrePersist
+    public void publishEvent(){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        EventSender eventSender = MetaworksRemoteService.getComponent(EventSender.class);
+
+        try {
+            eventSender.sendBusinessEvent(objectMapper.writeValueAsString(this));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error while sending event", e);
+        }
+
+    }
 }

@@ -19,6 +19,13 @@ eureka:
     metadataMap:
         deployment: local
         profile: local
+
+kafka:
+  bootstrap-servers: localhost:9092
+  topic:
+    bpm: bpm.topic
+  consumer-topic: bpm
+
 ---
 spring:
   profiles: dev,stg,prod
