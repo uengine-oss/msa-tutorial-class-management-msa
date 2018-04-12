@@ -1,0 +1,41 @@
+version: "3"
+services:
+
+  course-api:
+    image: course-service:latest
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - /tmp:/tmp
+    ports:
+      - "8088:8080"
+    networks:
+      - webnet
+
+  proxy:
+    image: clazz-service:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8080:8080"
+    networks:
+      - webnet
+
+  registry:
+    image: uengine-registry-server:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8761:8761"
+    networks:
+      - webnet
+
+
+networks:
+  webnet:
