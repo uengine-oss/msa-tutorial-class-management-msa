@@ -28,7 +28,8 @@ public class Clazz{
 
     String title;
 
-    @RestAssociation(/*serviceId = "course", */path="/courses/{courseId}", joinColumn = "courseId") @Transient  //@ManyToOne @JoinColumn(name="cid")
+    @RestAssociation(/*serviceId = "course", */path="/courses/{courseId}", joinColumn = "courseId") @Transient
+    //@ManyToOne @JoinColumn(name="cid")
     Course course;
 
     @RestAssociation(path="/instructors/{iid}", joinColumn = "iid") @Transient //@ManyToOne @JoinColumn(name="iid")
