@@ -16,7 +16,7 @@
  # 강사매핑
  http PATCH "http://localhost:8080/clazzes/1" instructor="http://localhost:8080/instructors/1"  # 장진영 강사에게 첫 클래스를 지정
  http PATCH "http://localhost:8080/clazzes/3" instructor="http://localhost:8080/instructors/1"  # 두번째 클래스는 같은 날에 있기 때문에 장진영 강사 일정이 쫑나서 오류가 날 것.
- http PATCH "http://localhost:8080/clazzes/2" instructor="http://localhost:8080/instructors/2"  # 이 요청은 성공 해야 함. 황상철 강사는 일정이 가능하기 때문에...
+ http PATCH "http://localhost:8080/clazzes/3" instructor="http://localhost:8080/instructors/2"  # 이 요청은 성공 해야 함. 황상철 강사는 일정이 가능하기 때문에...
 
 
 ```

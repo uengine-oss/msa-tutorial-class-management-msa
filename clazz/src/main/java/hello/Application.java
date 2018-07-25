@@ -47,6 +47,10 @@ public class Application extends Metaworks4BaseApplication {
 
     private static Log logger = LogFactory.getLog(Application.class);
 
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     protected static ApplicationContext applicationContext;
 
     protected Application(DataSource dataSource, JpaProperties properties, ObjectProvider<JtaTransactionManager> jtaTransactionManagerProvider, ObjectProvider<TransactionManagerCustomizers> transactionManagerCustomizers) {
@@ -73,5 +77,10 @@ public class Application extends Metaworks4BaseApplication {
         return new HibernateJpaVendorAdapter();
     }
 
+
+    @Bean
+    EventProducer eventProducer(){
+        return new EventProducer("localhost:9092");
+    }
 
 }

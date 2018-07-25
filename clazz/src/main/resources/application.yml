@@ -1,9 +1,18 @@
 ---
 spring:
   profiles: local
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        class-topic:
+          destination: bpm.topic
+          contentType: application/json
 
 server:
-  port: 8080
+  port: 8087
   servletPath: /
 
 eureka:
@@ -25,6 +34,7 @@ kafka:
   topic:
     bpm: bpm.topic
   consumer-topic: bpm
+
 
 ---
 spring:

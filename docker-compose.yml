@@ -4,18 +4,29 @@ services:
   course-api:
     image: course-service:latest
     deploy:
-      replicas: 2
+      replicas: 3
       restart_policy:
         condition: on-failure
     volumes:
       - /tmp:/tmp
     ports:
-      - "8088:8080"
+      - "8082:8080"
+    networks:
+      - webnet
+
+  clazz-api:
+    image: clazz-service:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8081:8080"
     networks:
       - webnet
 
   proxy:
-    image: clazz-service:latest
+    image: proxy-service:latest
     deploy:
       replicas: 1
       restart_policy:
@@ -26,7 +37,7 @@ services:
       - webnet
 
   registry:
-    image: uengine-registry-server:latest
+    image: registry-service:latest
     deploy:
       replicas: 1
       restart_policy:

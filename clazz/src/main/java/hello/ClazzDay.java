@@ -5,6 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.metaworks.annotation.RestAssociation;
 import org.metaworks.dwr.MetaworksRemoteService;
 import org.metaworks.eventsourcing.EventSender;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.util.concurrent.ListenableFuture;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -89,17 +96,36 @@ public class ClazzDay {
 
 
     @PrePersist
-    public void publishEvent(){
+    public void publishEvent() throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
+        String payload = objectMapper.writeValueAsString(this);
 
-        EventSender eventSender = MetaworksRemoteService.getComponent(EventSender.class);
+        /** version1. Using general Kafka API **/
+//        KafkaTemplate kafkaTemplate = Application.getApplicationContext().getBean(KafkaTemplate.class);
+//        ListenableFuture<SendResult<Integer, String>> future = kafkaTemplate.send("bpm.topic", payload);
 
-        try {
-            eventSender.sendBusinessEvent(objectMapper.writeValueAsString(this));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error while sending event", e);
-        }
+
+
+        /** version 2. Using Reactive Kafka API **/
+
+//        EventProducer eventProducer = Application.getApplicationContext().getBean(EventProducer.class);
+//        try {
+//            eventProducer.sendMessages("bpm.topic", 10);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+
+        /** version 3. Using Spring Cloud's Reactive Streams Kafka API **/
+
+        Streams streams = Application.getApplicationContext().getBean(Streams.class);
+
+        MessageChannel messageChannel = streams.outboundChannel();
+        messageChannel.send(MessageBuilder
+                .withPayload(this)
+                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .build());
 
     }
 }
