@@ -6,6 +6,7 @@ import org.metaworks.multitenancy.persistence.MultitenantRepositoryImpl;
 import org.metaworks.multitenancy.tenantawarefilter.TenantAwareFilter;
 import org.metaworks.springboot.configuration.Metaworks4BaseApplication;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,13 +22,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.orm.jpa.vendor.AbstractJpaVendorAdapter;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.jta.JtaTransactionManager;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.*;
 import org.uengine.five.service.DefinitionService;
 import org.uengine.five.service.SemanticEntityService;
 
+import javax.persistence.PostUpdate;
 import javax.sql.DataSource;
 
 /**
@@ -82,5 +88,31 @@ public class Application extends Metaworks4BaseApplication {
     EventProducer eventProducer(){
         return new EventProducer("localhost:9092");
     }
+
+
+    @Autowired
+    ClazzRepository clazzRepository;
+
+    @RequestMapping(method = RequestMethod.POST, path="/clazzAndCourse/{clazzId}")
+    public Object updateClazzAndCourse(@RequestBody Clazz clazzIn, @PathVariable("clazzId") Long clazzId){
+
+        Clazz clazz = clazzRepository.findOne(clazzId);
+        clazz.setStates(clazzIn.getStates());
+        clazz.setTitle(clazzIn.getTitle());
+
+        clazzRepository.save(clazz);
+
+        Streams streams = Application.getApplicationContext().getBean(Streams.class);
+
+        MessageChannel messageChannel = streams.outboundChannel();
+        messageChannel.send(MessageBuilder
+                .withPayload(clazzIn)
+                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .build());
+
+        return clazz;
+
+    }
+
 
 }

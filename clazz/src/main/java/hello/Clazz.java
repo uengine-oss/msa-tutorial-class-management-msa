@@ -3,6 +3,10 @@ package hello;
 import org.metaworks.annotation.RestAssociation;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.Resources;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -113,6 +117,8 @@ public class Clazz{
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
+
+
 
 
     @PrePersist @PreUpdate

@@ -1,6 +1,16 @@
 ---
 spring:
   profiles: local
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        class-topic:
+          destination: bpm.topic
+          contentType: application/json
+
 
 server:
   port: 8080

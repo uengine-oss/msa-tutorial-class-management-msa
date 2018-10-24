@@ -127,5 +127,7 @@ public class ClazzDay {
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
                 .build());
 
+        System.out.println("Event published");
+
     }
 }
