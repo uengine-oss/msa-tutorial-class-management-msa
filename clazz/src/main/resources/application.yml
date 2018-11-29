@@ -11,6 +11,8 @@ spring:
           destination: bpm.topic
           contentType: application/json
 
+
+
 server:
   port: 8087
   servletPath: /
@@ -34,6 +36,7 @@ kafka:
   topic:
     bpm: bpm.topic
   consumer-topic: bpm
+
 
 
 ---

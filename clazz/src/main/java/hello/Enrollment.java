@@ -1,6 +1,10 @@
 package hello;
 
 import org.metaworks.annotation.RestAssociation;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
 import javax.persistence.*;
 
@@ -82,5 +86,21 @@ public class Enrollment {
 
     public void setFeedback(String feedback) {
         this.feedback = feedback;
+    }
+
+
+
+    @PostPersist
+    private void afterSave(){
+        Streams streams = Application.getApplicationContext().getBean(Streams.class);
+
+        MessageChannel messageChannel = streams.outboundChannel();
+        messageChannel.send(MessageBuilder
+                .withPayload(new Enrolled(this))
+                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .build());
+
+
+
     }
 }

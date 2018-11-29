@@ -32,7 +32,7 @@ public class Clazz{
 
     String title;
 
-    @RestAssociation(/*serviceId = "course", */path="/courses/{courseId}", joinColumn = "courseId") @Transient
+    @RestAssociation(/*serviceId = "course", */path="/courses/{id}", joinColumn = "courseId") @Transient
     //@ManyToOne @JoinColumn(name="cid")
     Course course;
 
@@ -50,13 +50,14 @@ public class Clazz{
 
 
     /*** dummy ***/
-    Long courseId;
-        public Long getCourseId() {
+    String courseId;
+        public String getCourseId() {
             return courseId;
         }
-        public void setCourseId(Long courseId) {
+        public void setCourseId(String courseId) {
             this.courseId = courseId;
         }
+
 
     Long iid;
         public Long getIid() {

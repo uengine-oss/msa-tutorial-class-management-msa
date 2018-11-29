@@ -1,5 +1,6 @@
 package hello;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -14,8 +15,9 @@ public class EventListener {
 
     /** version 1. callback version **/
     @StreamListener(Streams.INPUT)
-    public void handleClazzDay(@Payload ClazzDay clazzDay) {
-        System.out.println("Received: "+ clazzDay.getDate()); //db 에 저장.
+    @JsonDeserialize(as = ClazzDayRegistered.class)
+    public void handleClazzDay(@Payload ClazzDayRegistered clazzDayRegistered) {
+        System.out.println("Received: "+ clazzDayRegistered.getDate()); //db 에 저장.
     }
 
 }

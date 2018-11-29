@@ -4,10 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.List;
 
-@Entity
 public class Customer {
 
-    @Id
     private Long id;
     private String firstName;
     private String lastName;

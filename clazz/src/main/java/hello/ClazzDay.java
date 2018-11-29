@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.metaworks.annotation.RestAssociation;
 import org.metaworks.dwr.MetaworksRemoteService;
-import org.metaworks.eventsourcing.EventSender;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.messaging.MessageChannel;
@@ -123,7 +122,7 @@ public class ClazzDay {
 
         MessageChannel messageChannel = streams.outboundChannel();
         messageChannel.send(MessageBuilder
-                .withPayload(this)
+                .withPayload(new ClazzDayRegistered(this))
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
                 .build());
 

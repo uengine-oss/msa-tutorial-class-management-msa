@@ -2,11 +2,10 @@ package hello;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PostPersist;
 
-@Entity
 public class Enrollment {
 
-    @Id
     Long id;
 
 //    Customer customer;
@@ -56,4 +55,5 @@ public class Enrollment {
     public void setFeedback(String feedback) {
         this.feedback = feedback;
     }
+
 }

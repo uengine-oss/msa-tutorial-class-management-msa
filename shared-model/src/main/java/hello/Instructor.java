@@ -3,10 +3,8 @@ package hello;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 public class Instructor {
 
-    @Id
     Long id;
     String firstName;
     String lastName;

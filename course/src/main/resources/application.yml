@@ -11,6 +11,14 @@ spring:
           destination: bpm.topic
           contentType: application/json
 
+  mongodb:
+    embedded:
+      version: 3.4.1
+  data:
+    mongodb:
+      host: mongodb.default.svc.cluster.local
+#      port: 30000
+    database: mongo-example
 
 server:
   port: 8080

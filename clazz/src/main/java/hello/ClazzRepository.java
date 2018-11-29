@@ -12,5 +12,5 @@ import java.util.List;
 
 public interface ClazzRepository extends MultitenantRepository<Clazz, Long> {
 
-    List<Clazz> findByCourseId(@Param("courseId") Long courseId);
+    List<Clazz> findByCourseId(@Param("courseId") String courseId);
 }

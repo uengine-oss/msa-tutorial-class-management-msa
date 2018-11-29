@@ -1,8 +1,7 @@
 package hello;
 
 import org.metaworks.annotation.RestAssociation;
-import org.metaworks.multitenancy.persistence.AfterLoad;
-import org.metaworks.multitenancy.persistence.AfterLoadOne;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,12 +13,14 @@ import java.util.List;
  http localhost:8080/courses title="aaa" duration=5 maxEnrollment=5 minEnrollment=1
  http localhost:8080/clazzes course="http://localhost:8080/courses/1"
  */
-@Entity
+//@Entity
+
+@Document
 public class Course {
 
-    @Id
-    @GeneratedValue
-    Long id;
+    //@Id
+    //@GeneratedValue
+    String id;
     String title;
     int duration;
     String description;
@@ -28,18 +29,18 @@ public class Course {
     Double unitPrice;
 
 
-    @OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "course")
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+    //@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "course")
+    @RestAssociation(path="/clazzes/search/findByCourseId?courseId={id}", joinColumn = "id") @Transient
     List<Clazz> clazzes;
-
-    @Transient
-    Long courseId;
-        public Long getCourseId() {
-            return courseId;
-        }
-        public void setCourseId(Long courseId) {
-            this.courseId = courseId;
-        }
-
 
     public List<Clazz> getClazzes() {
         return clazzes;
@@ -48,14 +49,6 @@ public class Course {
         this.clazzes = clazzes;
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
@@ -105,8 +98,4 @@ public class Course {
         this.unitPrice = unitPrice;
     }
 
-    @PostLoad
-    public void afterLoad() {
-        setCourseId(getId());
-    }
 }

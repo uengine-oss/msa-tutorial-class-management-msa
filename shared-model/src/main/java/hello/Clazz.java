@@ -5,16 +5,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
 public class Clazz{
 
-    @Id
     Long id;
     String states;
     int evaluationRate;
     String title;
 
-    @ManyToOne
     Course course;
 
     public Long getId() {

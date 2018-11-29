@@ -84,11 +84,6 @@ public class Application extends Metaworks4BaseApplication {
     }
 
 
-    @Bean
-    EventProducer eventProducer(){
-        return new EventProducer("localhost:9092");
-    }
-
 
     @Autowired
     ClazzRepository clazzRepository;

@@ -8,10 +8,8 @@ import java.util.Date;
 /**
  * Created by uengine on 2018. 3. 28..
  */
-@Entity
 public class Schedule {
 
-    @Id @GeneratedValue
     Long id;
     Date date;
     Long instructorId;

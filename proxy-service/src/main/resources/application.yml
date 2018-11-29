@@ -8,7 +8,7 @@ server:
   servletPath: /
 
 zuul:
-#  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   addProxyHeaders: true
 
   routes:

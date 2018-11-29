@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Course {
 
     @Id
-    Long id;
+    String id;
     String title;
     int duration;
     String description;
@@ -15,20 +15,12 @@ public class Course {
     int minEnrollment;
     Double unitPrice;
 
-    Long courseId;
-    public Long getCourseId() {
-        return courseId;
-    }
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
 
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
