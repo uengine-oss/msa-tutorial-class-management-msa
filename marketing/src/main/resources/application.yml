@@ -1,0 +1,49 @@
+---
+spring:
+  profiles: local
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        class-topic:
+          destination: bpm.topic
+          contentType: application/json
+
+  kafka:
+    consumer:
+      group-id: marketing
+#      client-id: marketing-
+
+
+server:
+  port: 8098
+  servletPath: /
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    statusPageUrlPath: ${server.servletPath}info
+    healthCheckUrlPath: ${server.servletPath}health
+    metadataMap:
+        deployment: local
+        profile: local
+
+---
+
+spring:
+  profiles: dev,stg,prod
+
+server:
+  port: 8080
+  servletPath: /
+
+eureka:
+  client:
+    enabled: false

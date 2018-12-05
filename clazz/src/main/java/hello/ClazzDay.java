@@ -97,9 +97,6 @@ public class ClazzDay {
     @PrePersist
     public void publishEvent() throws JsonProcessingException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        String payload = objectMapper.writeValueAsString(this);
-
         /** version1. Using general Kafka API **/
 //        KafkaTemplate kafkaTemplate = Application.getApplicationContext().getBean(KafkaTemplate.class);
 //        ListenableFuture<SendResult<Integer, String>> future = kafkaTemplate.send("bpm.topic", payload);

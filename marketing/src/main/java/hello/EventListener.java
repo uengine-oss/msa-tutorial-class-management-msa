@@ -13,7 +13,7 @@ public class EventListener {
     @StreamListener(Streams.INPUT)
     @JsonDeserialize(as = ClazzDayRegistered.class)
     public void handleClazzDay(@Payload ClazzDayRegistered clazzDayRegistered) {
-        System.out.println("Received: "+ clazzDayRegistered.getDate()); //db 에 저장.
+        System.out.println("광고 메일 발송 : "+ clazzDayRegistered.getDate()); //db 에 저장.
     }
 
 }
