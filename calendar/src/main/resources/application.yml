@@ -5,7 +5,8 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: localhost:9092
+          brokers: education-kafka:9092  # ${vcap.services.kakfa.host_port} and inject value from env variable
+          zkNodes: education-kafka-zookeeper:2181
       bindings:
         class-topic:
           destination: bpm.topic

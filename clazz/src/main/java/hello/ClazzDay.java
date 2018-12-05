@@ -117,6 +117,8 @@ public class ClazzDay {
 
         Streams streams = Application.getApplicationContext().getBean(Streams.class);
 
+        if(streams==null) return;
+
         MessageChannel messageChannel = streams.outboundChannel();
         messageChannel.send(MessageBuilder
                 .withPayload(new ClazzDayRegistered(this))
