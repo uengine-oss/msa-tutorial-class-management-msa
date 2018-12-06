@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.autoconfigure.transaction.TransactionManagerCustomizers;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,7 +35,6 @@ import javax.sql.DataSource;
 @EnableEurekaClient
 @RestController
 @EnableCircuitBreaker
-@EnableHystrixDashboard
 @SpringBootApplication
 @EnableJpaRepositories(repositoryBaseClass = MultitenantRepositoryImpl.class)
 

@@ -33,7 +33,7 @@ zuul:
       serviceId: instructor
       stripPrefix: false
     calendar:  #TODO
-      path: /calendar/**
+      path: /schedules/**
       serviceId: calendar
       stripPrefix: false
 
