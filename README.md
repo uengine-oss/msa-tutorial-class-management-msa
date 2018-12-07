@@ -1,3 +1,33 @@
+## Boot
+```
+(open new terminal)
+cd registry-service/
+mvn spring-boot:run
+
+(open new terminal)
+cd course
+mvn spring-boot:run -Dserver.port=9091
+
+(open new terminal)
+cd clazz
+mvn spring-boot:run -Dserver.port=9092
+
+(open new terminal)
+cd calendar
+mvn spring-boot:run -Dserver.port=9093
+
+(open new terminal)
+cd marketing
+mvn spring-boot:run -Dserver.port=9094
+
+(open new terminal)
+cd proxy-service
+mvn spring-boot:run -Dserver.port=9095
+
+```
+
+
+## Test
 ```
 
  # 과정등록
