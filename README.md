@@ -22,7 +22,7 @@ mvn spring-boot:run -Dserver.port=9094
 
 (open new terminal)
 cd proxy-service
-mvn spring-boot:run -Dserver.port=9095
+mvn spring-boot:run
 
 ```
 
