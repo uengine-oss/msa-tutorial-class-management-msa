@@ -10,6 +10,9 @@ public class ClazzDayRegistered {
     public ClazzDayRegistered(){} //for serialization
 
     public ClazzDayRegistered(ClazzDay clazzDay) {
+        if(clazzDay.getInstructor()!=null)
+            setInstructorId(clazzDay.getInstructor().getId().toString());
+
         setDate(clazzDay.getDate());
 
         if(clazzDay.getClazz()!=null)
@@ -37,5 +40,14 @@ public class ClazzDayRegistered {
     String title;
 
 
+    public String getInstructorId() {
+        return instructorId;
+    }
+
+    public void setInstructorId(String instructorId) {
+        this.instructorId = instructorId;
+    }
+
+    String instructorId;
 
 }

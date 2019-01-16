@@ -120,8 +120,15 @@ public class ClazzDay {
         if(streams==null) return;
 
         MessageChannel messageChannel = streams.outboundChannel();
+
+
+        ClazzDayRegistered clazzDayRegistered = new ClazzDayRegistered(this);
+
+        if(getClazz()!=null && getClazz().getIid()!=null)
+            clazzDayRegistered.setInstructorId(getClazz().getIid().toString());
+
         messageChannel.send(MessageBuilder
-                .withPayload(new ClazzDayRegistered(this))
+                .withPayload(clazzDayRegistered)
                 .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
                 .build());
 

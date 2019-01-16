@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 @Profile("kafka")
 @Component
 public class EventListener {
@@ -18,12 +20,14 @@ public class EventListener {
     /** version 1. callback version **/
     @StreamListener(Streams.INPUT)
     @JsonDeserialize(as = ClazzDayRegistered.class)
+    @Transactional
     public void handleClazzDay(@Payload ClazzDayRegistered clazzDayRegistered) {
         System.out.println("Received: "+ clazzDayRegistered.getDate()); //db 에 저장.
 
         Schedule schedule = new Schedule();
         schedule.setDate(clazzDayRegistered.getDate());
         schedule.setTitle(clazzDayRegistered.getTitle());
+        schedule.setInstructorId(Long.parseLong(clazzDayRegistered.getInstructorId()));
 
         scheduleRepository.save(schedule);
     }
