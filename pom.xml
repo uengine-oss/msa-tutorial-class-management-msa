@@ -24,6 +24,7 @@
 
         <!-- core domain -->
         <module>course</module>
+        <module>course_rdb</module>
         <module>clazz</module>
         <module>sme</module>
 
