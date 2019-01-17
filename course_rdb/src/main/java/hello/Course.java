@@ -21,7 +21,7 @@ public class Course {
 
     @Id
     @GeneratedValue
-    String id;
+    Long id;
     String title;
     int duration;
     String description;
@@ -30,13 +30,6 @@ public class Course {
     Double unitPrice;
 
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
 
     //@OneToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "course")
